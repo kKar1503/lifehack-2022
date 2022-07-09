@@ -10,6 +10,7 @@ import {
 } from "../components/blog";
 import ThemeProvider from "../theme";
 import { styled } from "@mui/material/styles";
+import { useRouter } from "next/router";
 
 // mock
 import POSTS from "../_mock/blog";
@@ -23,19 +24,19 @@ const SORT_OPTIONS = [
 ];
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
-const RootStyle = styled('div')({
-  display: 'flex',
-  minHeight: '100%',
-  overflow: 'hidden',
+const RootStyle = styled("div")({
+  display: "flex",
+  minHeight: "100%",
+  overflow: "hidden",
 });
 
-const MainStyle = styled('div')(({ theme }) => ({
+const MainStyle = styled("div")(({ theme }) => ({
   flexGrow: 1,
-  overflow: 'auto',
-  minHeight: '100%',
+  overflow: "auto",
+  minHeight: "100%",
   paddingTop: APP_BAR_MOBILE + 24,
   paddingBottom: theme.spacing(10),
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up("lg")]: {
     paddingTop: APP_BAR_DESKTOP + 24,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
@@ -43,12 +44,16 @@ const MainStyle = styled('div')(({ theme }) => ({
 }));
 
 export default function Dashboard() {
+  const router = useRouter();
+  const onClickCard = (event) => {
+    console.log("dab");
+    // router.push("/eventDetails"); 
+  };
   return (
-    
     <ThemeProvider>
-    <RootStyle>
-      <DashNav></DashNav>
-      <MainStyle>
+      <RootStyle>
+        <DashNav></DashNav>
+        <MainStyle>
           <Page title="Home">
             <Container>
               <Stack
@@ -58,7 +63,7 @@ export default function Dashboard() {
                 mb={5}
               >
                 <Typography variant="h4" gutterBottom>
-                  Projects
+                  Volunteer Projects
                 </Typography>
                 <Button variant="contained">New Post</Button>
               </Stack>
@@ -75,14 +80,15 @@ export default function Dashboard() {
 
               <Grid container spacing={3}>
                 {POSTS.map((post, index) => (
-                  <BlogPostCard key={post.id} post={post} index={index} />
+                  <button onClick={onClickCard}>
+                    <BlogPostCard key={post.id} post={post} index={index} />
+                  </button>
                 ))}
               </Grid>
             </Container>
           </Page>
-       </MainStyle>
-       </RootStyle>
-     </ThemeProvider>
-    
+        </MainStyle>
+      </RootStyle>
+    </ThemeProvider>
   );
 }
