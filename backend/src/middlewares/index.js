@@ -1,5 +1,7 @@
-const logger = require('./morgan');
+const accessLogger = require('./morgan');
+const errorHandler = require('./errorHandler');
 
 module.exports = {
-	accessLogger: logger,
+	accessLogger,
+	errorHandler,
 };
