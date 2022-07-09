@@ -1,3 +1,5 @@
+import "../components/homeNav.css";
+import "../components/index.css";
 import ThemeProvider from '../theme';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
