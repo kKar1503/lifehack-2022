@@ -222,3 +222,6 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # End of JetBrains IDE Files
+
+# Firebase serviceAccountKey
+serviceAccountKey.json
