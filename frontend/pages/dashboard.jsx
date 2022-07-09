@@ -1,55 +1,88 @@
 // material
-import { Grid, Button, Container, Stack, Typography } from '@mui/material';
+import { Grid, Button, Container, Stack, Typography } from "@mui/material";
 // components
-import Page from '../components/Page';
+import Page from "../components/Page";
+import DashNav from "../components/dashNav.jsx";
 import {
   BlogPostCard,
   BlogPostsSort,
   BlogPostsSearch,
-} from '../components/blog';
+} from "../components/blog";
+import ThemeProvider from "../theme";
+import { styled } from "@mui/material/styles";
+
 // mock
-import POSTS from '../_mock/blog';
+import POSTS from "../_mock/blog";
 
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [
-  { value: 'latest', label: 'Latest' },
-  { value: 'popular', label: 'Popular' },
-  { value: 'oldest', label: 'Oldest' },
+  { value: "latest", label: "Latest" },
+  { value: "popular", label: "Popular" },
+  { value: "oldest", label: "Oldest" },
 ];
+const APP_BAR_MOBILE = 64;
+const APP_BAR_DESKTOP = 92;
+const RootStyle = styled('div')({
+  display: 'flex',
+  minHeight: '100%',
+  overflow: 'hidden',
+});
+
+const MainStyle = styled('div')(({ theme }) => ({
+  flexGrow: 1,
+  overflow: 'auto',
+  minHeight: '100%',
+  paddingTop: APP_BAR_MOBILE + 24,
+  paddingBottom: theme.spacing(10),
+  [theme.breakpoints.up('lg')]: {
+    paddingTop: APP_BAR_DESKTOP + 24,
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  },
+}));
 
 export default function Dashboard() {
   return (
-    <Page title="Home">
-      <Container>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          mb={5}
-        >
-          <Typography variant="h4" gutterBottom>
-            Projects
-          </Typography>
-          <Button variant="contained">New Post</Button>
-        </Stack>
+    
+    <ThemeProvider>
+    <RootStyle>
+      <DashNav></DashNav>
+      <MainStyle>
+          <Page title="Home">
+            <Container>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                mb={5}
+              >
+                <Typography variant="h4" gutterBottom>
+                  Projects
+                </Typography>
+                <Button variant="contained">New Post</Button>
+              </Stack>
 
-        <Stack
-          mb={5}
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <BlogPostsSearch posts={POSTS} />
-          <BlogPostsSort options={SORT_OPTIONS} />
-        </Stack>
+              <Stack
+                mb={5}
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <BlogPostsSearch posts={POSTS} />
+                <BlogPostsSort options={SORT_OPTIONS} />
+              </Stack>
 
-        <Grid container spacing={3}>
-          {POSTS.map((post, index) => (
-            <BlogPostCard key={post.id} post={post} index={index} />
-          ))}
-        </Grid>
-      </Container>
-    </Page>
+              <Grid container spacing={3}>
+                {POSTS.map((post, index) => (
+                  <BlogPostCard key={post.id} post={post} index={index} />
+                ))}
+              </Grid>
+            </Container>
+          </Page>
+       </MainStyle>
+       </RootStyle>
+     </ThemeProvider>
+    
   );
 }
