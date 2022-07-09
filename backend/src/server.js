@@ -1,10 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const { CONFIG, WINSTON } = require('./constants');
 const { PORT = 3000, NODE_ENV = 'development' } = CONFIG;
 const { loggers } = require('./utils');
 
 const routes = require('./routes');
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
