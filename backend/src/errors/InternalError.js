@@ -1,4 +1,6 @@
-class InternalError extends Error {
+const { BaseError } = require('./BaseError');
+
+class InternalError extends BaseError {
 	constructor() {
 		super();
 		this.name = 'InternalError';

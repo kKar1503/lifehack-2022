@@ -1,4 +1,6 @@
-class QueryError extends Error {
+const { BaseError } = require('./BaseError');
+
+class QueryError extends BaseError {
 	constructor() {
 		super();
 		this.name = 'QueryError';

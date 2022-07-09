@@ -1,4 +1,6 @@
-class AuthenticationError extends Error {
+const { BaseError } = require('./BaseError');
+
+class AuthenticationError extends BaseError {
 	constructor() {
 		super();
 		this.name = 'AuthenticationError';
