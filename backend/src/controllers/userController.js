@@ -28,7 +28,12 @@ module.exports = {
 			.then(snapshot => {
 				if (snapshot.empty) return next(new NotFoundError('User'));
 				snapshot.forEach(doc => {
-					res.json(responses.success200(req, doc.data()));
+					res.json(
+						responses.success200(req, {
+							...doc.data(),
+							id: doc.id,
+						}),
+					);
 				});
 			})
 			.catch(error => {

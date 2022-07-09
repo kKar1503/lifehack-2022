@@ -28,7 +28,10 @@ module.exports = {
 				if (snapshot.empty) return next(new NotFoundError('Event'));
 				let events = [];
 				snapshot.forEach(doc => {
-					events.push(doc.data());
+					events.push({
+						...doc.data(),
+						id: doc.id,
+					});
 				});
 				res.json(responses.success200(req, events));
 			})
@@ -37,20 +40,24 @@ module.exports = {
 			});
 	},
 
-	findEventByName: (req, res, next) => {
-		const { name } = req.body;
+	findEventById: (req, res, next) => {
+		const { id } = req.body;
 		eventCollection
-			.where('name', '==', name)
+			.doc(id)
 			.get()
 			.then(snapshot => {
 				if (snapshot.empty) return next(new NotFoundError('Event'));
 				let events = [];
 				snapshot.forEach(doc => {
-					events.push(doc.data());
+					events.push({
+						...doc.data(),
+						id: doc.id,
+					});
 				});
-				res.json(req, responses.success200(events));
+				res.json(responses.success200(req, events));
 			})
 			.catch(error => {
+				console.log('logging for route', error);
 				return next(error);
 			});
 	},
