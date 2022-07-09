@@ -1,0 +1,28 @@
+{
+	"env": {
+		"commonjs": true,
+		"es2021": true,
+		"node": true
+	},
+	"extends": ["airbnb-base"],
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	},
+	"rules": {
+		"linebreak-style": ["error", "unix"],
+		"quotes": ["error", "double"],
+		"indent": ["warn", "tab", { "SwitchCase": 1 }],
+		"no-tabs": ["warn", { "allowIndentationTabs": true }],
+		"no-console": "off",
+		"no-restricted-syntax": [
+			"error",
+			{
+				"selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+				"message": "Unexpected property on console object was called"
+			}
+		],
+		"object-curly-newline": "off",
+		"arrow-parens": ["warn", "as-needed"],
+		"operator-linebreak": ["error", "after", { "overrides": { "?": "before", ":": "before" } }]
+	}
+}
