@@ -1,28 +1,34 @@
-// component
+import { AppRegistrationRounded, Home, Login, Menu, Person, QuestionMark } from "@mui/icons-material";
 
-import { Forward } from "@mui/icons-material";
-
-// ----------------------------------------------------------------------
-
-// const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
-const getIcon = (name) => <Forward />;
-
-const navConfig = [
+export default [
   {
     title: 'home',
     path: '/',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    icon: <Home />,
+  },
+  {
+    title: 'Login',
+    path: '/login',
+    icon: <Login />,
+  },
+  {
+    title: 'Register',
+    path: '/register',
+    icon: <AppRegistrationRounded />,
+  },
+  {
+    title: 'Dashboard',
+    path: '/dashboard',
+    icon: <Menu />,
   },
   {
     title: 'user',
     path: '/user',
-    icon: getIcon('eva:people-fill'),
+    icon: <Person />,
   },
   {
     title: 'Not found',
     path: '/404',
-    icon: getIcon('eva:alert-triangle-fill'),
+    icon: <QuestionMark />,
   },
 ];
-
-export default navConfig;
