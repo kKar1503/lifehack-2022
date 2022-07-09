@@ -14,20 +14,17 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', routes);
 
-// Used to running the database and server
-(async () => {
-	try {
-		app.listen(PORT, () => {
-			NODE_ENV === 'development'
-				? console.log(`Server listening on port ${PORT}`)
-				: loggers[WINSTON.DEBUG](`Server listening on port ${PORT}`);
-		});
-	} catch (error) {
+try {
+	app.listen(PORT, () => {
 		NODE_ENV === 'development'
-			? console.log(`Failed to start server`, error)
-			: loggers[WINSTON.ERROR](`Failed to start server`, error);
-	}
-})();
+			? console.log(`Server listening on port ${PORT}`)
+			: loggers[WINSTON.DEBUG](`Server listening on port ${PORT}`);
+	});
+} catch (error) {
+	NODE_ENV === 'development'
+		? console.log(`Failed to start server`, error)
+		: loggers[WINSTON.ERROR](`Failed to start server`, error);
+}
 
 // https://nodejs.org/api/process.html#process_event_uncaughtexception
 // https://stackoverflow.com/a/40867663
