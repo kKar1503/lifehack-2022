@@ -7,8 +7,11 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
+import Image from 'next/image'
+import logo from "../assets/volunteerLogo.png";
 
 export function HomeNav() {
+
   
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -39,5 +42,6 @@ export function HomeNav() {
         </Toolbar>
       </AppBar>
     </Box>
+
   );
 }
