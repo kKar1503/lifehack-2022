@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 
 export function HomeNav() {
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -24,8 +25,9 @@ export function HomeNav() {
         </IconButton> */}
 
           <Link href="/">
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Charity App
+            
+            <Typography variant="h6" component="div" color = "common.white" sx={{ flexGrow: 1 }}>
+             Charity App
             </Typography>
           </Link>
           <Link href="/login">
