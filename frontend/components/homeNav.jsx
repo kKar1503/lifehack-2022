@@ -22,14 +22,16 @@ export function HomeNav() {
         >
           <MenuIcon />
         </IconButton> */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Charity App
-          </Typography>
 
+          <Link href="/">
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Charity App
+            </Typography>
+          </Link>
           <Link href="/login">
             <Button color="inherit">Login</Button>
           </Link>
-          <Link href="/login">
+          <Link href="/register">
             <Button color="inherit">Register</Button>
           </Link>
         </Toolbar>
