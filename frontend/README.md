@@ -1,3 +1,8 @@
+## Acknowledgements
+
+Adapted from [minimal-ui-kit/material-kit-react](https://github.com/minimal-ui-kit/material-kit-react)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
