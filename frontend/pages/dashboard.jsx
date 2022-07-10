@@ -47,7 +47,7 @@ const MainStyle = styled("div")(({ theme }) => ({
 export default function Dashboard() {
   const [events, setEvents] = useState([]);
   const fetchData = async () => {
-    await axios.get("http://localhost:3000/api/v1/event/all-events");
+   return await axios.get("http://localhost:4000/api/v1/event/all-events");
   };
   useEffect(() => {
     let mounted = true;
@@ -61,10 +61,10 @@ export default function Dashboard() {
   }, []);
 
   const router = useRouter();
-  const onClickCard = (event) => {
+  const onClickCard = (event, id) => {
     // event.preventDefault();
 
-    router.push({ pathname: "/eventDetails", query: { post: post } });
+    router.push({ pathname: "/eventDetails", query: { id: id } });
   };
   const onCreateNew = (event) => {
     // event.preventDefault();
@@ -101,12 +101,12 @@ export default function Dashboard() {
               </Stack>
 
               <Grid container spacing={3}>
-                {POSTS.map((post, index) => (
+                {events.map((event, index) => (
                   <BlogPostCard
-                    key={post.id}
-                    post={post}
+                    key={event.id}
+                    post={event}
                     index={index}
-                    onClick={onClickCard}
+                    onClick={(e) => onClickCard(e, event.id)}
                   />
                 ))}
               </Grid>
