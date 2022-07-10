@@ -6,7 +6,7 @@ const userRouter = require('./user.routes');
 const eventRouter = require('./event.routes');
 
 // Middlewares
-const { accessLogger } = require('../middlewares');
+const { accessLogger, errorHandler } = require('../middlewares');
 
 router.use(accessLogger);
 router.use(userRouter);
@@ -16,5 +16,7 @@ router.use(eventRouter);
 router.get('/', (req, res) => {
 	res.status(200).send(`${PROJECT_NAME}'s backend API.`);
 });
+
+router.use(errorHandler);
 
 module.exports = router;
