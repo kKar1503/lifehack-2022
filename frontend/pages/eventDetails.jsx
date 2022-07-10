@@ -3,7 +3,7 @@ import { withRouter } from "next/router";
 import axios from "axios";
 
 function EventDetails({ router }) {
-  const [event, setEvent] = useState([]);
+  const [event, setEvent] = useState({});
 
   const fetchData = async () => {
     console.log(router.query.id);
@@ -16,15 +16,13 @@ function EventDetails({ router }) {
     if (router.query.id) {
       fetchData().then((res) => {
         if (mounted)
-          res.data.data.forEach((e) =>
-            setEvents((oldArray) => [...oldArray, e]),
-          );
+          setEvent(res.data.data);
       });
     }
 
     return () => (mounted = false);
   }, []);
 
-  return <div>{router.query.id}</div>;
+  return <div>{event.organiser}</div>;
 }
 export default withRouter(EventDetails);
