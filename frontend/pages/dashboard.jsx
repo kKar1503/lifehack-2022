@@ -10,7 +10,9 @@ import {
 } from "../components/blog";
 import ThemeProvider from "../theme";
 import { styled } from "@mui/material/styles";
-
+import { useRouter } from "next/router";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 // mock
 import POSTS from "../_mock/blog";
 
@@ -23,19 +25,19 @@ const SORT_OPTIONS = [
 ];
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
-const RootStyle = styled('div')({
-  display: 'flex',
-  minHeight: '100%',
-  overflow: 'hidden',
+const RootStyle = styled("div")({
+  display: "flex",
+  minHeight: "100%",
+  overflow: "hidden",
 });
 
-const MainStyle = styled('div')(({ theme }) => ({
+const MainStyle = styled("div")(({ theme }) => ({
   flexGrow: 1,
-  overflow: 'auto',
-  minHeight: '100%',
+  overflow: "auto",
+  minHeight: "100%",
   paddingTop: APP_BAR_MOBILE + 24,
   paddingBottom: theme.spacing(10),
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up("lg")]: {
     paddingTop: APP_BAR_DESKTOP + 24,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
@@ -43,12 +45,37 @@ const MainStyle = styled('div')(({ theme }) => ({
 }));
 
 export default function Dashboard() {
+  const [events, setEvents] = useState([]);
+  const fetchData = async () => {
+   return await axios.get("http://localhost:4000/api/v1/event/all-events");
+  };
+  useEffect(() => {
+    let mounted = true;
+    fetchData().then((res) => {
+      if (mounted)
+        res.data.data.forEach((e) =>
+          setEvents((oldArray) => [... oldArray, e]),
+        );
+    });
+    return () => (mounted = false);
+  }, []);
+
+  const router = useRouter();
+  const onClickCard = (event, id) => {
+    // event.preventDefault();
+
+    router.push({ pathname: "/eventDetails", query: { id: id } });
+  };
+  const onCreateNew = (event) => {
+    // event.preventDefault();
+
+    router.push({ pathname: "/createNewPost", query: { text: "dab" } });
+  };
   return (
-    
     <ThemeProvider>
-    <RootStyle>
-      <DashNav></DashNav>
-      <MainStyle>
+      <RootStyle>
+        <DashNav></DashNav>
+        <MainStyle>
           <Page title="Home">
             <Container>
               <Stack
@@ -58,9 +85,9 @@ export default function Dashboard() {
                 mb={5}
               >
                 <Typography variant="h4" gutterBottom>
-                  Projects
+                  Volunteer Projects
                 </Typography>
-                <Button variant="contained">New Post</Button>
+                <Button variant="contained" onClick = {onCreateNew}>Create New Event</Button>
               </Stack>
 
               <Stack
@@ -74,15 +101,19 @@ export default function Dashboard() {
               </Stack>
 
               <Grid container spacing={3}>
-                {POSTS.map((post, index) => (
-                  <BlogPostCard key={post.id} post={post} index={index} />
+                {events.map((event, index) => (
+                  <BlogPostCard
+                    key={event.id}
+                    post={event}
+                    index={index}
+                    onClick={(e) => onClickCard(e, event.id)}
+                  />
                 ))}
               </Grid>
             </Container>
           </Page>
-       </MainStyle>
-       </RootStyle>
-     </ThemeProvider>
-    
+        </MainStyle>
+      </RootStyle>
+    </ThemeProvider>
   );
 }
