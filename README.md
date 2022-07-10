@@ -1,6 +1,15 @@
-# Lifehack 2022: Boomer Kept Safe
+# Lifehack 2022: Values in Students
 
-Lifehack 2022 by NUS Computing. This is the project done by Team SPECIAL FORCES. The project highlights a home system that monitor elderly at home with visual sensors such as CCTV. However, it is also equipped with additional features to ensure that notifications or warning can be sent to a frontend dashboard to warn users to track RTMP feed data.
+Lifehack 2022 by NUS Computing. This is the project done by Team SPECIAL FORCES. 
+
+## What it does
+Our hack is a web application targeted at creating a platform that is aimed towards encouraging schools to involve their students to partake in volunteering works. While the overall concept of the web application is similar volunteers.sg, which serves as a volunteering web application for the general public, our application is focused towards schools' students.
+
+With system like LEAPS 2.0 in placed for school students to encourage participation for Value in Action activities, the platform is built specifically to cater for students to find such activities to participate.
+
+We wish to approach Non-Profit Organization to collaborate and utilize the platform to open volunteering works for students specifically. Students can also personally contact these NPO and self-organize such events, which is also encouraged by the LEAPS 2.0 system, which then allow others students on the platform to join.
+
+With additional information that we stored in the system such as hours participated, it can be used to show teachers the total hours participated.
 
 ## Stack Used in Project
 
@@ -10,29 +19,20 @@ We will be utilizing various stacks targetted at each part of the system separat
 
 For Frontend, we will be developing with React to create a monitoring dashboard
 
--   React - Frontend Framework
--   SCSS - Styling
--   Axios - API calling to our backend
--   React Icons - To utilize web-based icons such as bootstrap icons
--   React Router - For frontend routing
--   Yup - For login validation
+-   React
+-   NextJS
+-   Material UI
+-   Axios
+-   React Icons
+-   React Router
 
 ### Backend
 
 For Backend, we will be developig a REST API to take in data from the Python OpenCV program for video feed analysis and also trasmits data to our frontend React dashboard.
 
--   Express - REST API web framework
--   JWT - Authentication
--   Yup - Validation of Request data
--   Morgan - Request logging
--   Winston - General purpose logging
--   Bcrypt - Password hashing
--   Dotenv - Environmental Variables configurations
-
-### OpenCV Video Feed Processing
-
-For the video feed processing, we will set up a basic Nginx Web Server to take in RTMP feed data from our system's video source. The video source is passed from a hardware built to integrate our system. The received video feed will pass through our trained OpenCV Model to analyse if our monitoring user is safe.
-
--   Python OpenCV - To train a ML model and analyze the video feed from the RTMP server
--   Nginx Web Server - To setup the basic RTMP Web Server
--   FFMPeg RTMP Library - To process multimedia data stream for Python OpenCV
+-   Express
+-   JWT
+-   Yup
+-   Morgan
+-   Winston
+-   Dotenv
