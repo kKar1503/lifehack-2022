@@ -4,6 +4,6 @@ const { addEvent, findAllEvents, findEventById } =
 
 router.post('/event', addEvent);
 router.get('/event/all-events', findAllEvents);
-router.get('/event', findEventById);
+router.get('/event/:id', findEventById);
 
 module.exports = router;

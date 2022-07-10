@@ -49,7 +49,7 @@ module.exports = {
 	},
 
 	findEventById: (req, res, next) => {
-		const { id } = req.body;
+		const { id } = req.params;
 		eventCollection
 			.doc(id)
 			.get()
