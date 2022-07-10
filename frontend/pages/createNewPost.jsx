@@ -19,18 +19,24 @@ function CreateNewPost({ router }) {
   useEffect(() => {
     console.log(router.query.text);
   }, [router.query]);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (event) => {
+    // event.preventDefault();
+    console.log("Dab");
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
   };
-  
+
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="65%">
         <CssBaseline />
         <Box
           sx={{
@@ -40,88 +46,209 @@ function CreateNewPost({ router }) {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Create New Event
           </Typography>
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             sx={{ mt: 3 }}
           >
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
+                  margin="normal"
+                  // required
+                  helperText="dd/mm/yyyy"
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="startDate"
+                  label="Start Date"
+                  name="startDate"
                   autoFocus
+                  {...register("startDate", {
+                    required: true,
+                    pattern: /\S+\/\S+\/\S+/,
+                  })}
                 />
+                <Box>
+                  {errors.startDate && errors.startDate.type === "required" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      This is required field
+                    </span>
+                  )}
+                  {errors.startDate && errors.startDate.type === "pattern" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      Invalid Date
+                    </span>
+                  )}
+                </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
+                  margin="normal"
+                  // required
+                  helperText="dd/mm/yyyy"
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  id="endDate"
+                  label="End Date"
+                  name="endDate"
+                  type="endDate"
+                  autoFocus
+                  {...register("endDate", {
+                    required: true,
+                    pattern: /\S+\/\S+\/\S+/,
+                  })}
                 />
+                <Box>
+                  {errors.endDate && errors.endDate.type === "required" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      This is required field
+                    </span>
+                  )}
+                  {errors.endDate && errors.endDate.type === "pattern" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      Invalid Date
+                    </span>
+                  )}
+                </Box>
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
+                  margin="normal"
+                  // required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="organiser"
+                  label="Organiser"
+                  name="organiser"
+                  autoComplete="organiser"
+                  autoFocus
+                  {...register("organiser", {
+                    required: true,
+                    // pattern: /\S+@\S+\.\S+/,
+                  })}
                 />
+                <Box>
+                  {errors.email && errors.email.type === "required" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      This is required field
+                    </span>
+                  )}
+                  {/* {errors.email && errors.email.type === "pattern" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      Enter a valid email
+                    </span>
+                  )} */}
+                </Box>
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
+                  margin="normal"
+                  // required
+                  multiline
+                  rows={4}
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  id="description"
+                  label="Event Description"
+                  name="description"
+                  autoComplete="description"
+                  autoFocus
+                  {...register("email", {
+                    required: true,
+                    pattern: /\S+@\S+\.\S+/,
+                  })}
                 />
+                <Box>
+                  {errors.email && errors.email.type === "required" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      This is required field
+                    </span>
+                  )}
+                  {errors.email && errors.email.type === "pattern" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      Enter a valid email
+                    </span>
+                  )}
+                </Box>
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  margin="normal"
+                  // required
+                  helperText="Number of volunteers required"
+                  fullWidth
+                  id="slots"
+                  label="Slots"
+                  name="slots"
+                  autoFocus
+                  {...register("slots", {
+                    required: true,
+                    pattern: /[^[0-9]*$]/,
+                  })}
                 />
+                <Box>
+                  {errors.slots && errors.slots.type === "required" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      This is required field
+                    </span>
+                  )}
+                  {errors.slots && errors.slots.type === "pattern" && (
+                    <span
+                      className="error-message"
+                      style={{ color: "rgba(255,0,0,0.9)", fontSize: "12px" }}
+                    >
+                      Invalid number of volunteers
+                    </span>
+                  )}
+                </Box>
               </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                borderRadius: "12px",
+                padding: "16px",
+                backgroundColor: "rgba(87,131,219,0.7)",
+              }}
             >
-              Sign Up
+              Submit
             </Button>
             <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
+              <Grid item></Grid>
             </Grid>
           </Box>
         </Box>
-      
       </Container>
     </ThemeProvider>
   );
