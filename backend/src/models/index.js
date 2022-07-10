@@ -4,6 +4,7 @@ const VolunteeringModel = require('./volunteering');
 
 module.exports = {
 	EventModel,
-	UserModel,
+	UserModel: UserModel.UserSchema,
+	UserTypeModel: UserModel.UserTypeSchema,
 	VolunteeringModel,
 };

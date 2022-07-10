@@ -2,15 +2,7 @@ const { Response } = require('../classes');
 
 module.exports = {
 	success200: (req, data) => {
-		const response = new Response(data, true, 200, {
-			paginate: req.pagination?.paginate
-				? req.pagination.paginate
-				: false,
-		});
-		if (req.pagination?.paginate)
-			response
-				.displayLimit(req.pagination.displayLimit)
-				.page(req.pagination.page);
+		const response = new Response(data, true, 200);
 		return response;
 	},
 	success201: data => {

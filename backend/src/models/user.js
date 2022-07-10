@@ -1,17 +1,22 @@
-import { array, object, string } from 'yup';
-import VolunteeringSchema from './volunteering';
+const { array, object, string } = require('yup');
+const VolunteeringSchema = require('./volunteering');
 
 const UserPermissionSchema = object({
 	type: string().required(),
 });
 
-export const UserTypeSchema = object({
+const UserTypeSchema = object({
 	type: string().required(),
 	permissions: array().of(UserPermissionSchema),
 });
 
-export const UserSchema = object({
-	username: string().required(),
+const UserSchema = object({
+	id: string().required(),
 	userType: UserTypeSchema.required(),
 	volunteerings: array().of(VolunteeringSchema),
 });
+
+module.exports = {
+	UserTypeSchema,
+	UserSchema,
+};
