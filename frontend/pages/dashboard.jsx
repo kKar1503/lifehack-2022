@@ -61,10 +61,10 @@ export default function Dashboard() {
   }, []);
 
   const router = useRouter();
-  const onClickCard = (event, id) => {
+  const onClickCard = (event, id, index) => {
     // event.preventDefault();
 
-    router.push({ pathname: "/eventDetails", query: { id: id } });
+    router.push({ pathname: "/eventDetails", query: { id: id, index: index } });
   };
   const onCreateNew = (event) => {
     // event.preventDefault();
@@ -106,7 +106,7 @@ export default function Dashboard() {
                     key={event.id}
                     post={event}
                     index={index}
-                    onClick={(e) => onClickCard(e, event.id)}
+                    onClick={(e) => onClickCard(e, event.id, index)}
                   />
                 ))}
               </Grid>
