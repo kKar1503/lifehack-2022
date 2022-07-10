@@ -32,14 +32,14 @@ const TitleStyle = styled(Link)({
   WebkitBoxOrient: "vertical",
 });
 
-const AvatarStyle = styled(Avatar)(({ theme }) => ({
-  zIndex: 9,
-  width: 32,
-  height: 32,
-  position: "absolute",
-  left: theme.spacing(3),
-  bottom: theme.spacing(-2),
-}));
+// const AvatarStyle = styled(Avatar)(({ theme }) => ({
+//   zIndex: 9,
+//   width: 32,
+//   height: 32,
+//   position: "absolute",
+//   left: theme.spacing(3),
+//   bottom: theme.spacing(-2),
+// }));
 
 const InfoStyle = styled("div")(({ theme }) => ({
   display: "flex",
@@ -66,7 +66,7 @@ BlogPostCard.propTypes = {
 };
 
 export default function BlogPostCard({ post, index , onClick}) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
+  const { cover, name, view, comment, share, author, createdAt } = post;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
 
@@ -119,7 +119,7 @@ export default function BlogPostCard({ post, index , onClick}) {
             ...((latestPostLarge || latestPost) && { display: "none" }),
           }}
         />
-        <AvatarStyle
+        {/* <AvatarStyle
           alt={author.name}
           src={author.avatarUrl}
           sx={{
@@ -131,9 +131,9 @@ export default function BlogPostCard({ post, index , onClick}) {
               height: 40,
             }),
           }}
-        />
+        /> */}
 
-        <CoverImgStyle alt={title} src={cover} />
+        <CoverImgStyle alt={name} src={cover} />
       </CardMediaStyle>
 
       <CardContent
@@ -166,7 +166,7 @@ export default function BlogPostCard({ post, index , onClick}) {
             }),
           }}
         >
-          {title}
+          {name}
         </TitleStyle>
 
         <InfoStyle>

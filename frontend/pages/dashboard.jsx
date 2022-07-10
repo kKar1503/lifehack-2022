@@ -53,7 +53,7 @@ export default function Dashboard() {
     let mounted = true;
     fetchData().then((res) => {
       if (mounted)
-        response.data.data.forEach((e) =>
+        res.data.data.forEach((e) =>
           setEvents((oldArray) => [... oldArray, e]),
         );
     });
