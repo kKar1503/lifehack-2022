@@ -32,14 +32,14 @@ const TitleStyle = styled(Link)({
   WebkitBoxOrient: "vertical",
 });
 
-// const AvatarStyle = styled(Avatar)(({ theme }) => ({
-//   zIndex: 9,
-//   width: 32,
-//   height: 32,
-//   position: "absolute",
-//   left: theme.spacing(3),
-//   bottom: theme.spacing(-2),
-// }));
+const AvatarStyle = styled(Avatar)(({ theme }) => ({
+  zIndex: 9,
+  width: 32,
+  height: 32,
+  position: "absolute",
+  left: theme.spacing(3),
+  bottom: theme.spacing(-2),
+}));
 
 const InfoStyle = styled("div")(({ theme }) => ({
   display: "flex",
@@ -119,9 +119,9 @@ export default function BlogPostCard({ post, index , onClick}) {
             ...((latestPostLarge || latestPost) && { display: "none" }),
           }}
         />
-        {/* <AvatarStyle
-          alt={author.name}
-          src={author.avatarUrl}
+        <AvatarStyle
+          alt={post.organiser}
+          src={`/static/mock-images/avatars/avatar_${index + 1}.jpg`}
           sx={{
             ...((latestPostLarge || latestPost) && {
               zIndex: 9,
@@ -131,9 +131,9 @@ export default function BlogPostCard({ post, index , onClick}) {
               height: 40,
             }),
           }}
-        /> */}
+        />
 
-        <CoverImgStyle alt={name} src={cover} />
+        <CoverImgStyle alt={name} src={ `/static/mock-images/covers/cover_${index + 1}.jpg`} />
       </CardMediaStyle>
 
       <CardContent
