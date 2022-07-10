@@ -1,7 +1,7 @@
 const { Response } = require('../classes');
 
 module.exports = {
-	success200: (req, data) => {
+	success200: data => {
 		const response = new Response(data, true, 200);
 		return response;
 	},

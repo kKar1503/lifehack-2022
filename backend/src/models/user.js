@@ -1,22 +1,13 @@
 const { array, object, string } = require('yup');
-const VolunteeringSchema = require('./volunteering');
-
-const UserPermissionSchema = object({
-	type: string().required(),
-});
-
-const UserTypeSchema = object({
-	type: string().required(),
-	permissions: array().of(UserPermissionSchema),
-});
 
 const UserSchema = object({
 	id: string().required(),
-	userType: UserTypeSchema.required(),
-	volunteerings: array().of(VolunteeringSchema),
+	firstName: string().required(),
+	lastName: string().required(),
+	userType: string().required(),
+	volunteerings: array().of(string()),
 });
 
 module.exports = {
-	UserTypeSchema,
 	UserSchema,
 };

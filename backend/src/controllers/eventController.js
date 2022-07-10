@@ -13,7 +13,7 @@ module.exports = {
 			event = object.removeUnusedProp(event);
 			object.convertDateToTimestamp(event);
 			await eventCollection.add(event);
-			res.json(responses.success200(req, { message: 'Event added!' }));
+			res.json(responses.success201({ message: 'Event added!' }));
 		} catch (error) {
 			console.log('caught', error);
 			next(error);
@@ -41,7 +41,7 @@ module.exports = {
 					]);
 					events.push(event);
 				});
-				res.json(responses.success200(req, events));
+				res.json(responses.success200(events));
 			})
 			.catch(error => {
 				return next(error);
@@ -63,7 +63,7 @@ module.exports = {
 				object.convertTimestampToDate(event);
 				EventModel.cast(event);
 				event = object.omitByKeys(event, ['attendees']);
-				res.json(responses.success200(req, event));
+				res.json(responses.success200(event));
 			})
 			.catch(error => {
 				console.log('logging for route', error);
