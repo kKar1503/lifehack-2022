@@ -11,7 +11,8 @@ import {
 import ThemeProvider from "../theme";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
-
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 // mock
 import POSTS from "../_mock/blog";
 
@@ -44,10 +45,31 @@ const MainStyle = styled("div")(({ theme }) => ({
 }));
 
 export default function Dashboard() {
+  const [events, setEvents] = useState([]);
+  const fetchData = async () => {
+    await axios.get("http://localhost:3000/api/v1/event/all-events");
+  };
+  useEffect(() => {
+    let mounted = true;
+    fetchData().then((res) => {
+      if (mounted)
+        response.data.data.forEach((e) =>
+          setEvents((oldArray) => [... oldArray, e]),
+        );
+    });
+    return () => (mounted = false);
+  }, []);
+
   const router = useRouter();
   const onClickCard = (event) => {
-    console.log("dab");
-    // router.push("/eventDetails"); 
+    // event.preventDefault();
+
+    router.push({ pathname: "/eventDetails", query: { post: post } });
+  };
+  const onCreateNew = (event) => {
+    // event.preventDefault();
+
+    router.push({ pathname: "/createNewPost", query: { text: "dab" } });
   };
   return (
     <ThemeProvider>
@@ -65,7 +87,7 @@ export default function Dashboard() {
                 <Typography variant="h4" gutterBottom>
                   Volunteer Projects
                 </Typography>
-                <Button variant="contained">New Post</Button>
+                <Button variant="contained" onClick = {onCreateNew}>Create New Event</Button>
               </Stack>
 
               <Stack
@@ -80,9 +102,12 @@ export default function Dashboard() {
 
               <Grid container spacing={3}>
                 {POSTS.map((post, index) => (
-                  <button onClick={onClickCard}>
-                    <BlogPostCard key={post.id} post={post} index={index} />
-                  </button>
+                  <BlogPostCard
+                    key={post.id}
+                    post={post}
+                    index={index}
+                    onClick={onClickCard}
+                  />
                 ))}
               </Grid>
             </Container>
