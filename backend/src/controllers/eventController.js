@@ -37,7 +37,7 @@ module.exports = {
 					event = object.filterByKeys(event, [
 						'id',
 						'name',
-						'description',
+						'organiser',
 					]);
 					events.push(event);
 				});
